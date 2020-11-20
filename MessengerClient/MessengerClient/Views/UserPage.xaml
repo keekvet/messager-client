@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MessengerClient.Views.UserPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="userToFind" Placeholder="input name"/>
+            <Button x:Name="addUser" Text="add new user"/>
+            <ListView x:Name="userList">
+              
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

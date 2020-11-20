@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MessengerClient.Views.MessagePage">
+    <ContentPage.Content>
+        <StackLayout Padding="20, 0, 20, 20">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label x:Name="receiverName" Text="none" FontSize="Title"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                    <Label Text="Scroll down" HorizontalOptions="End" VerticalOptions="Center" />
+                    <Switch x:Name="scrollDownSwitch" IsToggled="True" HorizontalOptions="End"/>
+                </StackLayout>
+            </StackLayout>
+            <ListView x:Name="messagesList" 
+                      SelectionMode="None" 
+                      CachingStrategy="RetainElement" 
+                      SeparatorColor="White">
+            </ListView>
+            <StackLayout Orientation="Horizontal" VerticalOptions="End" >
+                <Editor x:Name="messageEditor" 
+                    MaxLength="600"
+                    HorizontalOptions="FillAndExpand"
+                    MinimumHeightRequest="200"
+                    Text=""
+                    Placeholder="Enter your message here" 
+                    AutoSize="TextChanges"/>
+                <Button x:Name="send" Text="send" HorizontalOptions="End"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

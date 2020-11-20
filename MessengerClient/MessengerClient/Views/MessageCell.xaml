@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MessengerClient.Views.MessageCell">
+    <ViewCell.View>
+        <StackLayout>
+            <Label Text="{Binding Text}" 
+                    HorizontalOptions="{Binding HorizontalOptionText}" 
+                    FontSize="Medium"/>
+            <Label Text="{Binding SendedTimeLocal}" 
+                    HorizontalOptions="{Binding HorizontalOptionTime}" 
+                    FontSize="10"
+                    TextColor="Gray"/>
+        </StackLayout>
+    </ViewCell.View>
+</ViewCell>
