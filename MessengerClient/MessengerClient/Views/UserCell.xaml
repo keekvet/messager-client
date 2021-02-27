@@ -2,11 +2,22 @@
 <ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MessengerClient.Views.UserCell">
-  <ViewCell.View>
-      <StackLayout
+    <ViewCell.View>
+        <StackLayout
           Margin="20">
-          <Label Text="{Binding Name}" FontSize="Large"/>
-          <Label x:Name="lastMessage" />
-      </StackLayout>
-  </ViewCell.View>
+            <Label 
+                Text="{Binding Name}" FontSize="Large"/>
+            <StackLayout
+                Orientation="Horizontal">
+                <Label 
+                    Text="Last message: "
+                    TextColor="#888"
+                    FontSize="Micro"/>
+                <Label 
+                    Text="{Binding LocalLastMessageTime}"
+                    TextColor="#888"
+                    FontSize="Micro"/>
+            </StackLayout>
+        </StackLayout>
+    </ViewCell.View>
 </ViewCell>

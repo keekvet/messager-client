@@ -19,5 +19,8 @@ namespace MessengerClient.DbModels
         {
             Name = user.Name;
         }
+
+        [Ignore]
+        public User User { get => new User { Name = this.Name, Password = "" }; }
     }
 }

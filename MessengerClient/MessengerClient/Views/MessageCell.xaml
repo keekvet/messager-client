@@ -16,7 +16,7 @@
             <Label Text="{Binding SendedTimeLocal}"
                     x:Name="time"
                     HorizontalOptions="{Binding HorizontalOptionTime}" 
-                    FontSize="10"
+                    FontSize="Micro"
                     TextColor="#888"/>
         </StackLayout>
     </ViewCell.View>

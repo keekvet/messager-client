@@ -15,10 +15,9 @@ namespace MessengerClient.Repositories
             Connection.Insert(new LocalUser(user));
         }
 
-        public static List<User> GetUsers()
+        public static List<LocalUser> GetLocalUsers()
         {
-            List<LocalUser> localUsers = Connection.Table<LocalUser>().ToList();
-            return localUsers.Select(u => new User() { Name = u.Name }).ToList();
+            return Connection.Table<LocalUser>().ToList();
         }
 
     }

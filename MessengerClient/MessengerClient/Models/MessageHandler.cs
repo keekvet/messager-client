@@ -48,6 +48,7 @@ namespace MessengerClient.Models
             return LocalMessageRepository.GetMessagesWithUsers(userName1, userName2);
         }
 
+
         public void RequestToShowMessage(LocalMessage message)
         {
             if (userHandler.Receiver?.Name == message.Sender || userHandler.Receiver?.Name == message.Receiver)

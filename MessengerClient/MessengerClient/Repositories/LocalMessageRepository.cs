@@ -51,9 +51,12 @@ namespace MessengerClient.Repositories
             savedMess.Delete(m => m.LocalId == localId && m.Id == 0);
         }
 
-        public static LocalMessage GetLastMessageByReceiver(LocalUser user)
+        public static LocalMessage GetLastMessageWithUsers(string userName1, string userName2)
         {
-            return savedMess.Where(m => m.Receiver == user.Name).Max();
+            return savedMess.Where(m =>
+            (m.Sender == userName1 && m.Receiver == userName2) ||
+            (m.Sender == userName2 && m.Receiver == userName1))
+                .DefaultIfEmpty(new LocalMessage("", DateTime.MinValue, userName1, userName2)).LastOrDefault();
         }
     }
 }

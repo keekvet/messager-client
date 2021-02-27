@@ -1,4 +1,5 @@
 ﻿using MessageCore.Models;
+using MessengerClient.Constant;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace MessengerClient.DbModels
         [Ignore]
         public string SendedTimeLocal
         {
-            get { return SendedTime.ToLocalTime().ToString("d MMM, HH:mm"); }
+            get { return SendedTime.ToLocalTime().ToString(Constants.MESSAGE_DATE_FORMAT); }
         }
 
 

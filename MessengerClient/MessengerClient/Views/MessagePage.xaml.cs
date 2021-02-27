@@ -37,7 +37,6 @@ namespace MessengerClient.Views
                             false);
             };
 
-            //messagesList.BackgroundColor = Color.Accent;
             messagesList.ItemsSource = messageViewModel.MessagesObservable;
             messagesList.ItemTemplate = new DataTemplate(typeof(MessageCell));
 

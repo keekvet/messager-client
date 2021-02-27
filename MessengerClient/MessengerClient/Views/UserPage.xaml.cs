@@ -1,5 +1,6 @@
 ﻿using MessageCore.Models;
 using MessengerClient.ViewModels;
+using MessengerClient.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +28,9 @@ namespace MessengerClient.Views
 
             userList.ItemTemplate = new DataTemplate(typeof(UserCell));
 
-            userList.ItemSelected += (sender, args) =>
+            userList.ItemTapped += (sender, args) =>
             {
-                userViewModel.SaveReceiver(userList.SelectedItem as User);
+                userViewModel.SaveReceiver((userList.SelectedItem as UserWrapper).User);
                 TabbedPage parentPage = App.Current.MainPage as TabbedPage;
                 parentPage.CurrentPage = parentPage.Children[1];
             };

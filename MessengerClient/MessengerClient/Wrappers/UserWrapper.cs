@@ -1,4 +1,7 @@
-﻿using MessengerClient.DbModels;
+﻿using MessageCore.Models;
+using MessengerClient.Constant;
+using MessengerClient.DbModels;
+using MessengerClient.Models;
 using MessengerClient.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,26 +13,36 @@ namespace MessengerClient.Wrappers
 {
     class UserWrapper
     {
-        LocalUser localUser;
+        UserHandler userHandler = UserHandler.GetInstance();
 
-        public string Name 
-        { 
-            get => localUser.Name; 
+        private User user;
+
+        public string Name
+        {
+            get => user.Name;
         }
 
         public DateTime LastMessageTime
         {
-            get => LocalMessageRepository.GetLastMessageByReceiver(localUser).SendedTime;
+            get => LocalMessageRepository.GetLastMessageWithUsers(user.Name, userHandler.User.Name).SendedTime;
         }
 
         public string LocalLastMessageTime
         {
-            get => LastMessageTime.ToLocalTime().ToString("H:mm dd, MMM");
+            get
+            {
+                if (LastMessageTime.Equals(DateTime.MinValue))
+                    return "no messages yet";
+                else
+                    return LastMessageTime.ToLocalTime().ToString(Constants.MESSAGE_DATE_FORMAT);
+            }
         }
 
-        public UserWrapper(LocalUser localUser)
+        public UserWrapper(User localUser)
         {
-            this.localUser = localUser;
+            this.user = localUser;
         }
+
+        public User User { get => user; }
     }
 }

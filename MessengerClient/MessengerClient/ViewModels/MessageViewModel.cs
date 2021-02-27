@@ -33,7 +33,6 @@ namespace MessengerClient.ViewModels
                 receiverName = value;
                 MessagesObservable.Clear();
 
-                //to delete
                 foreach (LocalMessage message in
                     messageHandler.GetMessagesWithUsers(userHandler.User.Name, receiverName))
                 {

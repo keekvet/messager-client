@@ -34,7 +34,9 @@ namespace MessengerClient.Constant
 
         public const string SENDED_MESSAGE_COLOR = "000";
         public const string RECEIVED_MESSAGE_COLOR = "222";
-        
+
+        public const string MESSAGE_DATE_FORMAT = "d MMM, HH:mm";
+
         #endregion
     }
 }
