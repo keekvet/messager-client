@@ -4,15 +4,25 @@
              x:Class="MessengerClient.Views.RegistrationPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="registration" HorizontalOptions="CenterAndExpand"/>
-            <StackLayout>
-                <Entry Placeholder="nickname"
-                HorizontalOptions="CenterAndExpand" />
-                <Entry Placeholder="password"
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Label x:Name="info" Text="registration" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+                <Entry 
+                    x:Name="nickname"
+                    Placeholder="nickname"
+                    MaxLength="32"
+                    WidthRequest="200" />
+                <Entry 
+                    x:Name="password"
+                    Placeholder="password"
+                    MaxLength="32"
+                    WidthRequest="200"
+                    IsPassword="True"/>
                 <Button Text="submit"
-                HorizontalOptions="CenterAndExpand" />
+                    x:Name="submit"
+                    HorizontalOptions="CenterAndExpand" />
             </StackLayout>
+            <Button Text="log in" 
+                    x:Name="logIn"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

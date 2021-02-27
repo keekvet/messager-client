@@ -20,5 +20,6 @@ namespace MessengerClient.Repositories
             List<LocalUser> localUsers = Connection.Table<LocalUser>().ToList();
             return localUsers.Select(u => new User() { Name = u.Name }).ToList();
         }
+
     }
 }

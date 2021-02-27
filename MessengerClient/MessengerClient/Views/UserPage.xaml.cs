@@ -25,12 +25,7 @@ namespace MessengerClient.Views
 
             userList.ItemsSource = UserViewModel.SavedUsers;
 
-            userList.ItemTemplate = new DataTemplate(() =>
-            {
-                TextCell textCell = new TextCell();
-                textCell.SetBinding(TextCell.TextProperty, "Name");
-                return textCell;
-            });
+            userList.ItemTemplate = new DataTemplate(typeof(UserCell));
 
             userList.ItemSelected += (sender, args) =>
             {

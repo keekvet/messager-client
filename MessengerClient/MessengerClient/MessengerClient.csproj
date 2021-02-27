@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <Reference Include="MessageCore">
-      <HintPath>E:\Dell_7440\projects\C#\MessageCore\MessageCore\bin\Debug\netstandard2.0\MessageCore.dll</HintPath>
+      <HintPath>..\..\..\MessageCore\MessageCore\bin\Debug\netstandard2.0\MessageCore.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -48,6 +48,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\RegistrationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\UserCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\UserPage.xaml">

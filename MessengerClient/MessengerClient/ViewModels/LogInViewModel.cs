@@ -8,13 +8,13 @@ using Xamarin.Forms;
 
 namespace MessengerClient.ViewModels
 {
-    class LogInViewModel : BindableObject
+    class LogInViewModel : INotifyPropertyChanged
     {
         public Command Login { get; private set; }
         public Command Registration { get; private set; }
         private static UserHandler userHandler = UserHandler.GetInstance();
 
-        public event PropertyChangedEventHandler NotifyPropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private static string userNameMaybe;
         public string UserNameMaybe
@@ -23,7 +23,7 @@ namespace MessengerClient.ViewModels
             set
             {
                 userNameMaybe = value;
-                NotifyPropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserNameMaybe)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserNameMaybe)));
             }
         }
 
@@ -34,7 +34,7 @@ namespace MessengerClient.ViewModels
             set
             {
                 userPasswordMaybe = value;
-                NotifyPropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserPasswordMaybe)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserPasswordMaybe)));
             }
         }
 

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MessengerClient.Views.MessagePage">
     <ContentPage.Content>
-        <StackLayout Padding="20, 0, 20, 20">
+        <StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                 <Label x:Name="receiverName" Text="none" FontSize="Title"/>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
@@ -13,17 +13,19 @@
             </StackLayout>
             <ListView x:Name="messagesList" 
                       SelectionMode="None" 
-                      CachingStrategy="RetainElement" 
-                      SeparatorColor="White">
+                      CachingStrategy="RetainElement">
             </ListView>
-            <StackLayout Orientation="Horizontal" VerticalOptions="End" >
+            <StackLayout x:Name="messageRow"
+                         Orientation="Horizontal" 
+                         VerticalOptions="End"
+                         Margin="20, 20, 20, 20">
                 <Editor x:Name="messageEditor" 
-                    MaxLength="600"
                     HorizontalOptions="FillAndExpand"
                     MinimumHeightRequest="200"
+                    MinimumWidthRequest="400"
+                    AutoSize="TextChanges"
                     Text=""
-                    Placeholder="Enter your message here" 
-                    AutoSize="TextChanges"/>
+                    Placeholder="Press CNTR + ENTER to send"/>
                 <Button x:Name="send" Text="send" HorizontalOptions="End"/>
             </StackLayout>
         </StackLayout>

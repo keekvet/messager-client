@@ -1,4 +1,5 @@
 ﻿using MessengerClient.DbModels;
+using MessengerClient.PlatformDepended;
 using MessengerClient.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,20 +18,15 @@ namespace MessengerClient.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MessagePage : ContentPage
     {
-        private const int MESSAGE_EDITOR_MAX_HEIGHT = 200;
         private MessageViewModel messageViewModel;
 
         public MessagePage()
         {
             InitializeComponent();
-            MessageEditorResize();
 
             messageViewModel = new MessageViewModel();
 
-            send.Command = messageViewModel.SendMessage;
-
-            messagesList.ItemsSource = messageViewModel.MessagesObservable;
-            messagesList.ItemTemplate = new DataTemplate(typeof(MessageCell));
+            send.Command = messageViewModel.SendMessageCmd;
 
             messageViewModel.MessagesObservable.CollectionChanged += (sender, args) =>
             {
@@ -41,38 +37,26 @@ namespace MessengerClient.Views
                             false);
             };
 
+            //messagesList.BackgroundColor = Color.Accent;
+            messagesList.ItemsSource = messageViewModel.MessagesObservable;
+            messagesList.ItemTemplate = new DataTemplate(typeof(MessageCell));
+
+            //add shortcut for Windows
+            KeyboardHandlerParent keyboardHandler = DependencyService.Get<KeyboardHandlerParent>();
+            keyboardHandler.RegisterShortcut(messageViewModel);
+
+
             receiverName.SetBinding(Label.TextProperty,
                 new Binding("ReceiverName", source: messageViewModel));
             messageEditor.SetBinding(Editor.TextProperty,
                 new Binding("WroteMessageText", source: messageViewModel, mode: BindingMode.TwoWay));
             messageEditor.SetBinding(Editor.IsVisibleProperty,
                 new Binding("EditTextEnabled", source: messageViewModel));
+            messageEditor.SetBinding(Editor.IsFocusedProperty,
+                new Binding("ShortcutListenerActive", source: keyboardHandler));
             send.SetBinding(Button.IsVisibleProperty,
                 new Binding("EditTextEnabled", source: messageViewModel));
-
         }
 
-        private void MessageEditorResize()
-        {
-            messageEditor.TextChanged += (sender, e) =>
-            {
-                if (messageEditor.Height > MESSAGE_EDITOR_MAX_HEIGHT)
-                {
-                    messageEditor.HeightRequest = MESSAGE_EDITOR_MAX_HEIGHT;
-                }
-                else if (messageEditor.Height == MESSAGE_EDITOR_MAX_HEIGHT)
-                {
-                    messageEditor.HeightRequest = -1;
-                }
-            };
-
-            messageEditor.SizeChanged += (sender, e) =>
-            {
-                if (messageEditor.Height > MESSAGE_EDITOR_MAX_HEIGHT)
-                {
-                    messageEditor.HeightRequest = MESSAGE_EDITOR_MAX_HEIGHT;
-                }
-            };
-        }
     }
 }

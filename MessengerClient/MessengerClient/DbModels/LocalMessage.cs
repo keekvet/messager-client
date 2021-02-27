@@ -9,7 +9,7 @@ using Xamarin.Forms;
 namespace MessengerClient.DbModels
 {
     [Table("local_message")]
-    class LocalMessage
+    public class LocalMessage : IComparable
     {
         [Column("id")]
         public int Id { get; set; }
@@ -29,9 +29,12 @@ namespace MessengerClient.DbModels
         [Column("sender")]
         public string Sender { get; set; }
 
-
         [Ignore]
-        public string SendedTimeLocal{ get => SendedTime.ToLocalTime().ToString("H:mm dd, MMM"); }
+        public string SendedTimeLocal
+        {
+            get { return SendedTime.ToLocalTime().ToString("d MMM, HH:mm"); }
+        }
+
 
         [Ignore]
         public LayoutOptions HorizontalOptionText { get; set; }
@@ -41,7 +44,7 @@ namespace MessengerClient.DbModels
 
         public LocalMessage() { }
 
-        public LocalMessage(Message message)
+        public LocalMessage(Message message)   
         {
             Id = message.Id;
             LocalId = message.SenderLocalId;
@@ -81,8 +84,12 @@ namespace MessengerClient.DbModels
                    Text == message.Text &&
                    SendedTime == message.SendedTime &&
                    Receiver == message.Receiver &&
-                   Sender == message.Sender &&
-                   SendedTimeLocal == message.SendedTimeLocal;
+                   Sender == message.Sender;
+        }
+
+        public int CompareTo(object obj)
+        {
+            return SendedTime.CompareTo(obj);
         }
     }
 }

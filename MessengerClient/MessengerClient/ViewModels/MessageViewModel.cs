@@ -10,17 +10,18 @@ using Xamarin.Forms;
 
 namespace MessengerClient.ViewModels
 {
-    class MessageViewModel : INotifyPropertyChanged
+    public class MessageViewModel : INotifyPropertyChanged
     {
         private MessageHandler messageHandler = MessageHandler.GetInstance();
         private UserHandler userHandler = UserHandler.GetInstance();
 
-        public Command SendMessage { get; set; }
+        public Command SendMessageCmd { get; set; }
         public ObservableCollection<LocalMessage> MessagesObservable { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public bool EditTextEnabled {
-            get => !(userHandler.Receiver is null); 
+        public bool EditTextEnabled
+        {
+            get => !(userHandler.Receiver is null);
         }
 
         private string receiverName;
@@ -33,7 +34,7 @@ namespace MessengerClient.ViewModels
                 MessagesObservable.Clear();
 
                 //to delete
-                foreach (LocalMessage message in 
+                foreach (LocalMessage message in
                     messageHandler.GetMessagesWithUsers(userHandler.User.Name, receiverName))
                 {
                     HandleAndShow(message);
@@ -57,7 +58,7 @@ namespace MessengerClient.ViewModels
 
         private void HandleAndShow(LocalMessage message)
         {
-            if(message.Receiver == receiverName)
+            if (message.Receiver == receiverName)
             {
                 message.HorizontalOptionText = LayoutOptions.End;
                 message.HorizontalOptionTime = LayoutOptions.End;
@@ -69,6 +70,28 @@ namespace MessengerClient.ViewModels
             }
             MessagesObservable.Add(message);
         }
+
+        public void SendMessage()
+        {
+            if (WroteMessageText is null)
+                return;
+
+            WroteMessageText = WroteMessageText.Trim();
+
+            if (WroteMessageText.Equals(string.Empty))
+                return;
+
+            LocalMessage message = new LocalMessage()
+            {
+                Receiver = userHandler.Receiver.Name,
+                Sender = userHandler.User.Name,
+                Text = WroteMessageText
+            };
+            messageHandler.SaveAndShowMessage(message);
+            messageHandler.SendMessage(message);
+            WroteMessageText = string.Empty;
+        }
+
 
         public MessageViewModel()
         {
@@ -108,18 +131,7 @@ namespace MessengerClient.ViewModels
                 });
             });
 
-            SendMessage = new Command(() =>
-            {
-                LocalMessage message = new LocalMessage()
-                {
-                    Receiver = userHandler.Receiver.Name,
-                    Sender = userHandler.User.Name,
-                    Text = WroteMessageText
-                };
-                messageHandler.SaveAndShowMessage(message);
-                messageHandler.SendMessage(message);
-                WroteMessageText = string.Empty;
-            });
+            SendMessageCmd = new Command(SendMessage);
 
         }
 

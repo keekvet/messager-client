@@ -49,6 +49,7 @@ namespace MessengerClient.ViewModels
                         });
                     userHandler.ReceiverFound = false;
                 }
+                
             });
 
             AddUserCommand = new Command(() =>

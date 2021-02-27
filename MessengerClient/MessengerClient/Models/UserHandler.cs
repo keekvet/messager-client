@@ -84,6 +84,12 @@ namespace MessengerClient.Models
             ServerConnectionHandler.RequestsToSend.Add(RequestConverter.ComposeUserExist(userToFind));
         }
 
+        internal void SendRegister(User user)
+        {
+            ServerConnectionHandler.RequestsToSend.Add(
+                 RequestConverter.ComposeRegistration(user));
+        }
+
         public void SendLogin(User user)
         {
             ServerConnectionHandler.RequestsToSend.Add(

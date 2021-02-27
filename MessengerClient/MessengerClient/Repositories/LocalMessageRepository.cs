@@ -50,5 +50,10 @@ namespace MessengerClient.Repositories
         {
             savedMess.Delete(m => m.LocalId == localId && m.Id == 0);
         }
+
+        public static LocalMessage GetLastMessageByReceiver(LocalUser user)
+        {
+            return savedMess.Where(m => m.Receiver == user.Name).Max();
+        }
     }
 }

@@ -7,8 +7,9 @@ namespace MessengerClient.Constant
 {
     class Constants
     {
+        #region connection constants
         public const int PORT = 12345;
-        public const string IP = "127.0.0.1";
+        public const string IP = "192.168.0.149";
 
         public const string DATABASE_FILENAME = "local_message_db.db";
 
@@ -27,5 +28,13 @@ namespace MessengerClient.Constant
                 return Path.Combine(basePath, DATABASE_FILENAME);
             }
         }
+        #endregion
+
+        #region view constants
+
+        public const string SENDED_MESSAGE_COLOR = "000";
+        public const string RECEIVED_MESSAGE_COLOR = "222";
+        
+        #endregion
     }
 }

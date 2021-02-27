@@ -49,6 +49,7 @@ namespace MessengerClient.Models
                                     userHandler.Found = RequestConverter.DecomposeLoginResponse(data);
                                     break;
                                 case RequestType.RegistrationResponse:
+                                    userHandler.Found = RequestConverter.DecomposeLoginResponse(data);
                                     break;
                                 case RequestType.SendMessage:
                                     Message message = RequestConverter.DecomposeMessage(data);
