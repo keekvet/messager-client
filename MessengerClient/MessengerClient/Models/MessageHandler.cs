@@ -76,7 +76,8 @@ namespace MessengerClient.Models
 
         public void SyncMessage(MessageSyncInfo messageSyncInfo)
         {
-            LocalMessage message = LocalMessageRepository.GetMessageByLocalId(messageSyncInfo.LocalId);
+            LocalMessage message = LocalMessageRepository
+                .GetMessageByLocalIdAndSenderName(messageSyncInfo.LocalId, messageSyncInfo.SenderName);
             if (message is null)
                 return;
 
@@ -84,7 +85,8 @@ namespace MessengerClient.Models
             message.SendedTime = messageSyncInfo.NewDateTime;
             SaveAndShowMessage(message);
 
-            RequestToHideMessage(LocalMessageRepository.GetMessageByLocalId(message.LocalId));
+            RequestToHideMessage(
+                LocalMessageRepository.GetMessageByLocalIdAndSenderName(message.LocalId, message.Sender));
             LocalMessageRepository.RemoveMessageByLocalIdIfWithoutId(message.LocalId);
             
             ServerConnectionHandler.RequestsToSend.Add(

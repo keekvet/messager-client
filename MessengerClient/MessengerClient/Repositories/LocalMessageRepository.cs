@@ -36,9 +36,9 @@ namespace MessengerClient.Repositories
             (m.Sender == userName2 && m.Receiver == userName1)).ToList();
         }
 
-        public static LocalMessage GetMessageByLocalId(int localId)
+        public static LocalMessage GetMessageByLocalIdAndSenderName(int localId, string senderName)
         {
-            return savedMess.Where(m => m.LocalId == localId).First();
+            return savedMess.Where(m => m.LocalId == localId && m.Sender == senderName).First();
         }
 
         public static LocalMessage GetMessageById(int id)
