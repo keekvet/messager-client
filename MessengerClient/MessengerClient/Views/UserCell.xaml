@@ -4,20 +4,30 @@
              x:Class="MessengerClient.Views.UserCell">
     <ViewCell.View>
         <StackLayout
-          Margin="20">
-            <Label 
-                Text="{Binding Name}" FontSize="Large"/>
+            Margin="20"
+            Orientation="Horizontal"
+            HorizontalOptions="FillAndExpand">
             <StackLayout
-                Orientation="Horizontal">
+                HorizontalOptions="Start">
                 <Label 
-                    Text="Last message: "
-                    TextColor="#888"
-                    FontSize="Micro"/>
-                <Label 
-                    Text="{Binding LocalLastMessageTime}"
-                    TextColor="#888"
-                    FontSize="Micro"/>
+                Text="{Binding Name}" FontSize="Large"/>
+                <StackLayout
+                    Orientation="Horizontal">
+                    <Label 
+                        Text="Last message: "
+                        TextColor="#888"
+                        FontSize="Micro"/>
+                    <Label 
+                        Text="{Binding LocalLastMessageTime}"
+                        TextColor="#888"
+                        FontSize="Micro"/>
+                </StackLayout>
             </StackLayout>
+            <Button
+                x:Name="delete"
+                Text="Delete"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="EndAndExpand"/>
         </StackLayout>
     </ViewCell.View>
 </ViewCell>

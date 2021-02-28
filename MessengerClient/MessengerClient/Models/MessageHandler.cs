@@ -55,7 +55,7 @@ namespace MessengerClient.Models
             {
                 NewMessages.Add(message);
                 MessagingCenter.Send(this, MessageKeys.MESSAGE_AVAILABLE, true);
-                MessagingCenter.Send(this, MessageKeys.UPDATE_USER_LAST_MESSAGE, true);
+                MessagingCenter.Send(this, MessageKeys.UPDATE_USERS, true);
             }
         }
 

@@ -38,9 +38,9 @@ namespace MessengerClient.Wrappers
             }
         }
 
-        public UserWrapper(User localUser)
+        public UserWrapper(User user)
         {
-            this.user = localUser;
+            this.user = user;
         }
 
         public User User { get => user; }

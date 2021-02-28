@@ -36,16 +36,9 @@ namespace MessengerClient.Models
             get => receiver;
             set
             {
-                if (value is null || value.Name.Equals(string.Empty))
-                    return;
                 receiver = value;
                 MessagingCenter.Send(this, MessageKeys.RECEIVER_TRANSFER, value);
             }
-        }
-
-        public string ReceiverName 
-        {
-            get => receiver?.Name;
         }
 
         private bool receiverFound;

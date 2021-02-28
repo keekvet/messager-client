@@ -5,6 +5,7 @@ using MessengerClient.DbModels;
 using MessengerClient.Models;
 using MessengerClient.Repositories;
 using MessengerClient.Wrappers;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -50,7 +51,7 @@ namespace MessengerClient.ViewModels
                     {
                         MainThread.BeginInvokeOnMainThread(() =>
                         {
-                            LocalUserRepository.AddUser(foundReceiver);
+                            LocalUserRepository.AddUser(foundReceiver, userHandler.User);
                         });
                         UpdateUsers();
                     }
@@ -59,7 +60,12 @@ namespace MessengerClient.ViewModels
 
             });
 
-            MessagingCenter.Subscribe<MessageHandler, bool>(this, MessageKeys.UPDATE_USER_LAST_MESSAGE, (sender, arg) =>
+            MessagingCenter.Subscribe<MessageHandler, bool>(this, MessageKeys.UPDATE_USERS, (sender, arg) =>
+            {
+                UpdateUsers();
+            });
+
+            MessagingCenter.Subscribe<UserCellViewModel, string>(this, MessageKeys.CONVERSATION_CHANGED, (sender, arg) =>
             {
                 UpdateUsers();
             });
@@ -76,7 +82,9 @@ namespace MessengerClient.ViewModels
             {
                 SavedUsers.Clear();
 
-                List<UserWrapper> sortedUsers = LocalUserRepository.GetLocalUsers().Select(u => new UserWrapper(u.User))
+                List<UserWrapper> sortedUsers = LocalUserRepository.GetLocalUsers()
+                    .Where(u => u.ContactOwner.Equals(userHandler.User.Name))
+                    .Select(u => new UserWrapper(u.User))
                     .OrderByDescending(u => u.LastMessageTime).ToList();
 
                 foreach (UserWrapper user in sortedUsers)

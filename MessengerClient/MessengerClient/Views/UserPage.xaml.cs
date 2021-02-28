@@ -36,8 +36,9 @@ namespace MessengerClient.Views
             };
 
             addUser.Command = userViewModel.AddUserCommand;
-            userToFind.SetBinding(Entry.TextProperty, 
+            userToFind.SetBinding(Entry.TextProperty,
                 new Binding(path: "UserToFind", source: userViewModel, mode: BindingMode.TwoWay));
         }
     }
+
 }

@@ -58,5 +58,16 @@ namespace MessengerClient.Repositories
             (m.Sender == userName2 && m.Receiver == userName1))
                 .DefaultIfEmpty(new LocalMessage("", DateTime.MinValue, userName1, userName2)).LastOrDefault();
         }
+
+        public static List<LocalMessage> GetMessagesByUser(string userName)
+        {
+            return savedMess.Where(m => m.Receiver.Equals(userName) || m.Sender.Equals(userName)).ToList();
+        }
+        public static void RemoveMessagesByUser(string userName)
+        {
+            
+            List<LocalMessage> userMessages = GetMessagesByUser(userName);
+            savedMess.Delete(m => m.Receiver.Equals(userName) || m.Sender.Equals(userName));
+        }
     }
 }

@@ -13,11 +13,14 @@ namespace MessengerClient.DbModels
         [PrimaryKey]
         public string Name { get; set; }
 
+        public string ContactOwner { get; set; }
+
         public LocalUser(){}
 
-        public LocalUser(User user)
+        public LocalUser(User user, User contactOwner)
         {
             Name = user.Name;
+            ContactOwner = contactOwner.Name;
         }
 
         [Ignore]

@@ -21,23 +21,25 @@ namespace MessengerClient.ViewModels
 
         public bool EditTextEnabled
         {
-            get => !(userHandler.Receiver is null);
+            get => !receiverName.Equals(Constants.DEFAULT_RECEIVER_TEXT);
         }
 
-        private string receiverName;
+        private string receiverName = Constants.DEFAULT_RECEIVER_TEXT;
         public string ReceiverName
         {
             get => receiverName;
             set
             {
                 receiverName = value;
+
                 MessagesObservable.Clear();
 
-                foreach (LocalMessage message in
+                if (!value.Equals(Constants.DEFAULT_RECEIVER_TEXT))
+                    foreach (LocalMessage message in
                     messageHandler.GetMessagesWithUsers(userHandler.User.Name, receiverName))
-                {
-                    HandleAndShow(message);
-                }
+                    {
+                        HandleAndShow(message);
+                    }
 
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(EditTextEnabled)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ReceiverName)));
@@ -130,9 +132,13 @@ namespace MessengerClient.ViewModels
                 });
             });
 
+
+            MessagingCenter.Subscribe<UserCellViewModel, string>(this, MessageKeys.CONVERSATION_CHANGED, (sender, arg) =>
+            {
+                userHandler.Receiver = null;
+            });
+
             SendMessageCmd = new Command(SendMessage);
-
         }
-
     }
 }
